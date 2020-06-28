@@ -15,4 +15,8 @@ class SpringretryApplicationTests {
         retryService.retry();
     }
 
+    @Test
+    void myRetry() {
+        retryService.myRetry();
+    }
 }
