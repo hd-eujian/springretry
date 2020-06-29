@@ -1,5 +1,6 @@
 package com.eujian.springretry;
 
+import com.eujian.springretry.service.MyRetryService;
 import com.eujian.springretry.service.RetryService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class SpringretryApplicationTests {
     @Autowired
     private RetryService retryService;
+    @Autowired
+    private MyRetryService myRetryService;
 
     @Test
     void contextLoads() {
@@ -17,6 +20,6 @@ class SpringretryApplicationTests {
 
     @Test
     void myRetry() {
-        retryService.myRetry();
+        myRetryService.myRetry();
     }
 }

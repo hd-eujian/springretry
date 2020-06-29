@@ -28,6 +28,10 @@ public class Aop {
         MyBackoff backoff = myRetryable.backoff();
         int maxAttempts = myRetryable.maxAttempts();
         long sleepSecond = backoff.value();
+        double multiplier = backoff.multiplier();
+        if(multiplier<=0){
+            multiplier = 1;
+        }
         Exception ex = null;
         int retryCount = 1;
         do{
@@ -39,7 +43,7 @@ public class Aop {
                 logger.info("睡眠{}毫秒",sleepSecond);
                 Thread.sleep(sleepSecond);
                 retryCount++;
-                sleepSecond = (long)(sleepSecond*backoff.multiplier());
+                sleepSecond = (long)(multiplier)*sleepSecond;
                 if(sleepSecond>backoff.maxDelay()){
                     sleepSecond = backoff.maxDelay();
                     logger.info("睡眠时间太长，改成{}毫秒",sleepSecond);
